@@ -1,3 +1,16 @@
 <resources>
-    <string name="app_name">MyToDoApplication</string>
+
+    <string name="app_name">My ToDo Application</string>
+    <string name="title_hint">Введите название заметки</string>
+    <string name="note_title">Название</string>
+    <string name="note_detail">Описание</string>
+    <string name="is_done">Выполнено</string>
+    <string name="isDone">Сделано</string>
+    
+    <string name="date_picker_title">Дата создания заметки</string>
+    <string name="title_note">Название заметки</string>
+    <string name="date_note">Дата создания заметки</string>
+    <string name="new_note">new Note</string>
+    <string name="share">share</string>
+
 </resources>
