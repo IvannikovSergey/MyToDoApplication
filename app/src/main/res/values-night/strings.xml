@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="isDone">Сделано</string>
+    <string name="title_note">Название заметки</string>
+    <string name="date_note">Дата создания заметки</string>
+</resources>
