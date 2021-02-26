@@ -7,6 +7,7 @@ public class Note {
 
     private UUID id;
     private String title;
+    private String description;
     private Date date;
     private boolean isDone;
 
@@ -23,6 +24,14 @@ public class Note {
         return title;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -35,7 +44,7 @@ public class Note {
         this.date = date;
     }
 
-    public boolean isDone(boolean isChecked) {
+    public boolean isDone() {
         return isDone;
     }
 

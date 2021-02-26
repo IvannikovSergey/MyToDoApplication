@@ -8,6 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ public class NotesListFragment extends Fragment {
 
     private RecyclerView notesRecyclerView;
     private NotesAdapter notesAdapter;
+    private int adapterPosition;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,7 +74,9 @@ public class NotesListFragment extends Fragment {
 
     private class NotesHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView titleTextView;
+        private TextView descriptionTextView;
         private TextView dateTextView;
+        private ImageView imageViewSolved;
         private Note note;
 
         public NotesHolder(@NonNull View itemView) {
@@ -80,26 +84,29 @@ public class NotesListFragment extends Fragment {
             itemView.setOnClickListener(this);
 
             titleTextView = itemView.findViewById(R.id.note_title);
+            descriptionTextView = itemView.findViewById(R.id.note_description);
             dateTextView = itemView.findViewById(R.id.note_date);
+            imageViewSolved = itemView.findViewById(R.id.note_solved);
         }
 
         public void bind(Note note) {
             this.note = note;
-            titleTextView.setText(note.getTitle());
+            titleTextView.setText("Название: " + note.getTitle());
+            descriptionTextView.setText("Детали: " + note.getDescription());
             DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.FULL);
             String format = dateFormat.format(note.getDate());
-            dateTextView.setText(format);
+            dateTextView.setText("Дата создания: " + format);
+
+            imageViewSolved.setVisibility(note.isDone() ? View.VISIBLE : View.GONE);
+
         }
 
         @Override
         public void onClick(View v) {
+            adapterPosition = getAdapterPosition();
             Intent intent = DetailActivity.newIntent(getActivity(), note.getId());
             startActivity(intent);
         }
-
-//        public NotesHolder(LayoutInflater inflater, ViewGroup parent) {
-//            super(inflater.inflate(R.layout.list_item_notes, parent, false));
-//        }
     }
 
     private class NotesAdapter extends RecyclerView.Adapter<NotesHolder> {
@@ -116,8 +123,6 @@ public class NotesListFragment extends Fragment {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_notes, parent, false);
             return new NotesHolder(view);
 
-//            LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-//            return new NotesHolder(layoutInflater, parent);
         }
 
         @Override
@@ -131,6 +136,7 @@ public class NotesListFragment extends Fragment {
         public int getItemCount() {
             return notes.size();
         }
+
     }
 
     private void updateUI() {
@@ -141,7 +147,7 @@ public class NotesListFragment extends Fragment {
             notesAdapter = new NotesAdapter(notesList);
             notesRecyclerView.setAdapter(notesAdapter);
         } else {
-            notesAdapter.notifyDataSetChanged();
+            notesAdapter.notifyItemChanged(adapterPosition);
         }
     }
 }

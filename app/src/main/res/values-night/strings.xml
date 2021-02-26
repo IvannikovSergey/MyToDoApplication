@@ -3,4 +3,5 @@
     <string name="isDone">Сделано</string>
     <string name="title_note">Название заметки</string>
     <string name="date_note">Дата создания заметки</string>
+    <string name="description_note">Описание</string>
 </resources>
